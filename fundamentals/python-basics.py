@@ -33,4 +33,5 @@ print("first item in list: ", myList[0])
 for i in myList:
     print(i)
 
-    
+#check length of a list
+print("number of elements in myList: ", len(myList))
