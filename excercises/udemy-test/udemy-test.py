@@ -7,6 +7,7 @@ for i in str.split():
 
 
 # use range() to print all the even numbers from 0 to 20
+print('\nusing for loop:')
 for i in range(1, 21):
     if i % 2 == 0:
         print(i)
@@ -31,10 +32,10 @@ for even in str.split():
 print('\nsame result using list comprehension:')
 print([even for even in str.split() if len(even) % 2 == 0])
 
-# write a program that prints integers from 1 to 100, but for multiples of 3, print 'Fizz'
+# write a program that prints integers from 1 to 50, but for multiples of 3, print 'Fizz'
 # and multiples of 5, print 'Buzz' and for multiples of both 3 and 5 print 'FizzBuzz'
 print('\nFizzBuzz for numbers divisible by 3 or 5 or both')
-for i in range(1, 101):
+for i in range(1, 51):
     if i % 3 == 0 and i % 5 == 0:
         print('FizzBuzz')
     elif i % 3 == 0:
