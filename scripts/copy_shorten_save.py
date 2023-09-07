@@ -10,8 +10,9 @@ from reportlab.pdfgen import canvas
 
 links = []
 SLEEP_TIME = 0.5
-MAX_DUPLICATE_COUNT = 5
+MAX_DUPLICATE_COUNT = 20
 pdf_file = 'tabs.pdf'
+
 
 def read_urls():
 	pyautogui.hotkey('ctrl', '1')	# go to first tab in the browser
@@ -19,7 +20,7 @@ def read_urls():
 	duplicate_count = 0
 	shortener= pyshorteners.Shortener()	# get the class from pyshorteners library and assign it to a variable
 	while duplicate_count < MAX_DUPLICATE_COUNT:
-		pyautogui.click(x=100, y=70, button='left')	# typical left mouse click coordinates to select address bar in the browser
+		pyautogui.click(x=1000, y=70, button='left')			# typical left mouse click coordinates to select address bar in the browser
 		sleep(SLEEP_TIME)
 		pyautogui.hotkey('ctrl', 'a')
 		sleep(SLEEP_TIME)
@@ -40,6 +41,7 @@ def read_urls():
 		pyautogui.hotkey('ctrl', 'tab')
 		sleep(SLEEP_TIME)
 
+
 def save_to_pdf():
 	c = canvas.Canvas(pdf_file, pagesize=letter)	# initialize Canvas object
 	c.setFont('Helvetica', 12)
@@ -47,9 +49,11 @@ def save_to_pdf():
 	# write the headline
 	c.drawString(100, 700, 'CHROME TABS') # y=700
 	y = 670	# initial y coordinate for the links
-	# write the links 
+	i = 0
+	# write the links
 	for link in links:
-		c.drawString(100, y, link)
+		i += 1
+		c.drawString(100, y, f'{i}: {link}')
 		y -= 12	# decrease y coordinate to move each link to the next line
 	c.save()
 

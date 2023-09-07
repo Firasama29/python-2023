@@ -1,0 +1,34 @@
+import pyautogui	# for automating the process of copying urls
+from fpdf import FPDF	# for creating the pdf file
+
+# get the urls of every chrome tabs
+def get_urls():
+	pyautogui.hotkey('ctrl', 'l')	# focus on the url
+	pyautogui.hotkey('ctrl', 'c')	# copy url
+	url = pyautogui.paste()
+	return url
+
+
+# save the urls to pdf
+def save_to_pdf(urls, output_file):
+	pdf = FPDF()
+	pdf.add_page()
+	pdf.set_font("Arial", 20)
+	pdf.multi_cell(0, 10, urls)
+	pdf.output(output_file)
+
+
+if __name__ == "__main__":
+	urls = ""
+	while True:
+		url = get_urls()
+		if url:
+			urls += url + "\n"
+		else:
+			break
+	if urls:
+		output_file = "~/Desktop/chrome_urls.pdf"
+		save_to_pdf(urls, output_file)
+		print(f"URLS saved to {output_file}")
+	else:
+		print("No ULRs found")
